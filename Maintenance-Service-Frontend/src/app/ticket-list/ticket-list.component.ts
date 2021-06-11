@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Priority, Ticket } from '../model/model';
 import { AlertService } from '../services/alertService';
 import { ApiService } from '../services/api-service';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-ticket-list',
@@ -10,57 +12,27 @@ import { ApiService } from '../services/api-service';
 })
 export class TicketListComponent implements OnInit {
 
+  displayedColumns: string[] = ['id','roomNr', 'title', 'priority', 'status', 'roomStatus', 'edit'];
+  dataSource: any;
+
   result: any;
   tickets: Ticket[] = [];
   constructor(private api: ApiService, private alert: AlertService) { }
+  
 
   async ngOnInit(){
-    this.result = await this.api.getAllTickets().catch( () => {
-      this.alert.error("Tickets not accessable")
+
+    this.result = await this.api.getAllTickets().catch( error => {
+      this.alert.error("Tickets not accessable" + error)
     })
 
     if(this.result._embedded != null){
       this.tickets = this.result._embedded.ticketList
-    }
-   
+    }  
 
+    this.dataSource = new MatTableDataSource(this.tickets);
   }
 
-  sortList(parameter: string){
-    let copiedList = []
-    this.tickets.forEach(val => copiedList.push(Object.assign({}, val)));
-
-    if(parameter == "id"){
-      this.tickets.sort((a,b) => a.id - b.id)
-    }
-
-    if(parameter == "title"){
-      this.tickets.sort((a,b) => {
-        if(a.title < b.title) { return -1; }
-        if(a.title > b.title) { return 1; }
-        return 0;
-      })
-    }
-
-    if(parameter == "priority"){
-      const priorityOrder = Object.values(Priority);
-      this.tickets.sort((a,b) => {
-       return priorityOrder.indexOf(a.priority) - priorityOrder.indexOf(b.priority)
-      })
-    }
-
-
-
-
-    let arraysAreUnchange: boolean = true
-    let i = 0;
-    this.tickets.forEach(ticket => {
-      if(ticket != copiedList[i]){
-        arraysAreUnchange = false
-      }
-      i++;
-    })
-    console.log(arraysAreUnchange)
-  }
+  
 
 }
