@@ -13,6 +13,7 @@ import { AlertComponent } from './alert/alert.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClockComponent } from './clock/clock.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
   ],

@@ -2,7 +2,7 @@ export interface Room{
     id: number;
     roomNr: String;
     desc: String;
-    roomtype: RoomType;
+    roomType: RoomType;
     booked: boolean;
 }
 
