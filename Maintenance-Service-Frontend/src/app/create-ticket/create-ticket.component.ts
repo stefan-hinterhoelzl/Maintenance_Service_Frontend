@@ -2,8 +2,12 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
+import { Ticket } from '../model/model';
 import { Room } from '../model/room';
 import { ApiService } from '../services/api-service';
+import {formatDate} from '@angular/common';
+import { AlertService } from '../services/alertService';
+import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY } from '@angular/cdk/overlay/overlay-directives';
 
 @Component({
   selector: 'app-create-ticket',
@@ -26,7 +30,7 @@ export class CreateTicketComponent implements OnInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
 
-  constructor(private api: ApiService, private fb: FormBuilder,  private _ngZone: NgZone) { 
+  constructor(private api: ApiService, private fb: FormBuilder,  private _ngZone: NgZone, private alert: AlertService) { 
     this.title = new FormControl('', [Validators.required]);
     this.descr = new FormControl('');
     this.room = new FormControl('', [Validators.required]);
@@ -61,7 +65,23 @@ export class CreateTicketComponent implements OnInit {
 
 
   async addTicket() {
-   
+   const ticket =  <Ticket> {
+     title: this.title.value,
+     description: this.descr.value,
+     room: this.room.value,
+     priority: this.priority.value,
+     createdDate: Date.now(),
+     resolved: false,
+     resolvedate: null
+   }
+   //delete later 
+   console.log(ticket)
+
+   await this.api.saveTicket(ticket).catch(error =>  {
+    console.log(error)  
+    this.alert.error("Fehler beim Anlegen: " + error.error);
+   })
+
   }
 
 

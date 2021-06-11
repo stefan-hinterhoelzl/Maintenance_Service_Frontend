@@ -1,13 +1,12 @@
 import { Room } from "./room";
 
 export interface Ticket{
-    id: Number;
+    id?: number;
     title: String;
-    descr: String;
+    description: String;
     room: Room;
-    prio: Priority;
-   //image: string;
-    date: Date;
+    priority: Priority;
+    createdDate: number;
     resolved: boolean;
     resolvedate: Date;
 }
