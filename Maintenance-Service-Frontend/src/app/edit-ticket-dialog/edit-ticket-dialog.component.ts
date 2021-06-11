@@ -16,12 +16,13 @@ export class EditTicketDialogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<EditTicketDialogComponent>, @Inject(MAT_DIALOG_DATA) data, private _ngZone: NgZone, private fb: FormBuilder, private api: ApiService) { 
     this.currTicket = data;
+    this.currRoom = data.room;
+    console.log(this.currRoom);
 
     this.title = new FormControl(this.currTicket.title, [Validators.required]);
     this.descr = new FormControl(this.currTicket.description);
-    this.room = new FormControl(this.currTicket.room, [Validators.required]);
     this.priority = new FormControl(this.currTicket.priority);
-    this.selectedRoom = this.currTicket.room;
+
 
     this.form = this.fb.group({
       title: this.title,
@@ -30,7 +31,11 @@ export class EditTicketDialogComponent implements OnInit {
       priority: this.priority,
     });
 
-    this.form.patchValue({room:this.currTicket.room})
+    let currentRoom: Room = {... this.currTicket.room};
+
+    console.log(currentRoom);
+
+    this.form.get('room').setValue(currentRoom);
 
   }
 
@@ -40,7 +45,7 @@ export class EditTicketDialogComponent implements OnInit {
   room: FormControl;
   priority: FormControl;
   currTicket: Ticket;
-  selectedRoom: Room;
+  currRoom: Room;
 
 
   res: any;
@@ -53,6 +58,9 @@ export class EditTicketDialogComponent implements OnInit {
   async ngOnInit() {
     this.res = await this.api.getAllRooms();
     this.rooms = this.res._embedded.roomList;
+    
+    
+    console.log(this.rooms);
 
   }
 
@@ -71,7 +79,7 @@ export class EditTicketDialogComponent implements OnInit {
       id: this.currTicket.id,
       title: this.title.value,
       description: this.descr.value,
-      room: this.room.value,
+      room: this.currRoom,
       priority: this.priority.value,
       createdTimeInSeconds: this.currTicket.createdTimeInSeconds,
       resolved: this.currTicket.resolved,

@@ -14,12 +14,11 @@
 
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Raum wählen </mat-label>
-                    <mat-select [formControl]="room" required>
-                        <mat-option *ngFor="let room of rooms" [value]=room [selected] = "room === currTicket.room">
+                    <mat-select [(ngModel)] = "currRoom.id" [ngModelOptions]= "{standalone:true}" required>
+                        <mat-option *ngFor="let room of rooms" [value]=room.id [selected] = "room === currTicket.room">
                             Raum: {{room.roomNr}} - Type: {{room.roomType}} - Status: {{room.booked?"Bewohnt":"Frei"}}    
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="room.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                 <label id="prio-radio">Priorität wählen:</label>
                 <mat-radio-group
