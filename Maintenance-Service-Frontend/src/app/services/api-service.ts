@@ -4,7 +4,7 @@ import { Ticket } from "../model/model";
 import { Room } from "../model/room";
 
 const BackendURL: String = "https://maintenance-spring.herokuapp.com/" 
-const weatherApi: string = "https://api.openweathermap.org/data/2.5/onecall?lat=48.33&lon=14.31&exclude=minutely,hourly,daily,alerts&appid=82e6e7356b3e7f28514afc1cdd0723fe"
+const weatherApi: string = "https://api.openweathermap.org/data/2.5/onecall?lat=48.33&lon=14.31&exclude=minutely,hourly,daily,alerts&units=metric&lang=de&appid=82e6e7356b3e7f28514afc1cdd0723fe"
 const httpOptions =  {
     headers: new HttpHeaders({
        'Content-Type': 'application/json'

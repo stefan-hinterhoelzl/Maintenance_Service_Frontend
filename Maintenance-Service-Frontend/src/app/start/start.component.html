@@ -4,10 +4,15 @@
         <h1>Willkommen zum JKU Maintenance Service</h1>
         <app-clock ></app-clock>
 
-        <div fxLayout=column fxLayoutAlign="start end" >
-            <div class="amount-text">Anzahl aller Tickets: {{totalAmountOfTickets}}</div>
-            <div class="amount-text">Offene Tickets: {{openTickets}}</div>
-            <div class="amount-text">Geschlossene Tickets: {{closedTickets}}</div>
+        <div fxLayout=column fxLayoutAlign="center center" class="weather-text">
+            <div> Temperatur: {{temperatur}}°C</div>
+            <div> Wetter: {{weather}} </div>
+            <br>
+        </div>
+        <div fxLayout=column fxLayoutAlign="start end" class="amount-text">
+            <div>Anzahl aller Tickets: {{totalAmountOfTickets}}</div>
+            <div>Offene Tickets: {{openTickets}}</div>
+            <div>Geschlossene Tickets: {{closedTickets}}</div>
         </div>
     </mat-card>
 </div>

@@ -2,6 +2,11 @@
     font-size: larger;
 }
 
+.weather-text{
+    font-size: larger;
+    font-weight: bold;
+}
+
 .spacer{
     height: 15%
 }
