@@ -1,0 +1,34 @@
+.ticketInfo {
+    display: flex;
+    flex-direction: row;
+    margin: 0px 20px;
+    font-size: larger;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.ticketInfoItem{
+    width: 15%;
+    display: flex;
+    justify-content: start;
+    min-width: 100px;
+    padding: 0px 0px;
+}
+
+.number {
+    display: flex; 
+    text-align: center; 
+    align-items: center; 
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.divider {
+    margin: 10px auto;
+    height: 1px;
+    background: #000;
+    width: 100%;
+}

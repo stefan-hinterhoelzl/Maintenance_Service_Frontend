@@ -1,1 +1,26 @@
-<p>ticket-list works!</p>
+<div class = "main-wrapper" fxLayout = column fxLayoutAlign = "start center">
+    <mat-card style="width: 80%;">
+        <div class="ticketInfo" style="margin-bottom: 20px;"> 
+            <div class="number" (click)="sortList('id')" style="cursor: pointer;">Nr.</div>
+            <div class="ticketInfoItem" (click)="sortList('roomNr')" style="cursor: pointer;">Raumnummer:</div> 
+            <div class="ticketInfoItem" (click)="sortList('title')" style="cursor: pointer;">Titel:</div> 
+            <div class="ticketInfoItem" (click)="sortList('priority')" style="cursor: pointer;">Priorität:  </div> 
+            <div class="ticketInfoItem" (click)="sortList('resolved')" style="cursor: pointer;">Status: </div>
+            <div class="ticketInfoItem" (click)="sortList('room.booked')" style="cursor: pointer;">Zimmerstatus: </div>
+            <div class="ticketInfoItem" ></div>
+        </div>
+        <div class="divider"></div>
+        <div *ngFor="let ticket of tickets">
+            <div class="ticketInfo"> 
+                <div class="number">{{ticket.id}}</div>
+                <div class="ticketInfoItem" >{{ticket.room.roomNr}}</div> 
+                <div class="ticketInfoItem" >{{ticket.title}}</div> 
+                <div class="ticketInfoItem" >{{ticket.priority}} </div> 
+                <div class="ticketInfoItem" >{{ticket.resolved? "Geschlossen":"Offen"}}</div>
+                <div class="ticketInfoItem" >{{ticket.room.booked? "Belegt":"Frei"}}</div>
+                <div class="ticketInfoItem"><button mat-button mat-raised-button>Bearbeiten</button></div>
+            </div>
+            <div class="divider"></div>
+        </div>
+    </mat-card>
+</div>
