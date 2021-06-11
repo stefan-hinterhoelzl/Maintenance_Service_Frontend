@@ -31,12 +31,6 @@ export class EditTicketDialogComponent implements OnInit {
       priority: this.priority,
     });
 
-    let currentRoom: Room = {... this.currTicket.room};
-
-    console.log(currentRoom);
-
-    this.form.get('room').setValue(currentRoom);
-
   }
 
   form: FormGroup;
