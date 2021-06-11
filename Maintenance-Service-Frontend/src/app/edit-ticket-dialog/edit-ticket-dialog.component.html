@@ -1,1 +1,52 @@
-<p>edit-ticket-dialog works!</p>
+<div class = "main-wrapper" fxLayout = column fxLayoutAlign = "start center">
+
+<h2 mat-dialog-title>Ticket bearbeiten</h2>
+
+        <form class="example-form" [formGroup] = "form">
+        
+            <mat-card-content>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Titel</mat-label>
+                    <input matInput  type = "text" [formControl] = "title" required>
+                    <mat-error *ngIf="title.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+               
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Raum wählen </mat-label>
+                    <mat-select [formControl]="room" required>
+                        <mat-option *ngFor="let room of rooms" [value]=room [selected] = "room === currTicket.room">
+                            Raum: {{room.roomNr}} - Type: {{room.roomType}} - Status: {{room.booked?"Bewohnt":"Frei"}}    
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="room.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+                <label id="prio-radio">Priorität wählen:</label>
+                <mat-radio-group
+                     aria-labelledby="prio-radio"
+                    [formControl]="priority"
+                    class = "radio-button">
+                    <mat-radio-button style = "margin: 5px;"  *ngFor="let prio of priorities" [value]="prio">
+                                    {{prio}}
+                    </mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field style = "width: 100%;"  appearance="outline">
+                    <mat-label>Beschreibung</mat-label>
+                    <textarea matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="5"
+                        cdkAutosizeMaxRows="10"
+                        [formControl]="descr">
+                    </textarea>
+                    </mat-form-field>
+            </mat-card-content>
+
+            <p>* sind Pflichtfelder</p>
+            <div style = "width:100%" fxLayout = "row" fxLayoutAlign ="space-around center">
+                <button class = "btn" mat-button mat-raised-button color="accent" (click) = "close()">Abbrechen</button>
+                <button class = "btn" mat-button mat-raised-button color="primary" [disabled] = "!form.valid" (click) = "save()">Speichern</button>
+                
+            </div>
+        </form>
+</div>

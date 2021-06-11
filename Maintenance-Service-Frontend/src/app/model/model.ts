@@ -6,9 +6,9 @@ export interface Ticket{
     description: String;
     room: Room;
     priority: Priority;
-    createdDate: number;
+    createdTimeInSeconds: number;
     resolved: boolean;
-    resolvedate: Date;
+    resolvedTimeInSeconds: Date;
 }
 
 export enum Priority{

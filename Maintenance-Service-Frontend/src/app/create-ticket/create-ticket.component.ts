@@ -46,8 +46,12 @@ export class CreateTicketComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.res = await this.api.getAllRooms();
-    this.rooms = this.res._embedded.roomList;
+    this.res = await this.api.getAllRooms().catch(error => {
+      this.alert.error("Fehler beim Abfragen der Räume"+error)
+    });
+    if (this.res._embedded != undefined) {
+      this.rooms = this.res._embedded.roomList;
+    }
   }
 
   triggerResize() {
@@ -70,9 +74,9 @@ export class CreateTicketComponent implements OnInit {
      description: this.descr.value,
      room: this.room.value,
      priority: this.priority.value,
-     createdDate: Date.now(),
+     createdTimeInSeconds: Date.now(),
      resolved: false,
-     resolvedate: null
+     resolvedTimeInSeconds: null
    }
    //delete later 
    console.log(ticket)

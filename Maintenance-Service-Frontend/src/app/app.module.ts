@@ -12,8 +12,9 @@ import { EditTicketDialogComponent } from './edit-ticket-dialog/edit-ticket-dial
 import { AlertComponent } from './alert/alert.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ClockComponent } from './clock/clock.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeleteTicketDialogComponent } from './delete-ticket-dialog/delete-ticket-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CreateTicketComponent,
     TicketListComponent,
     EditTicketDialogComponent,
+    DeleteTicketDialogComponent,
     AlertComponent,
     ClockComponent
 

@@ -37,5 +37,13 @@ export class ApiService
         return this.http.get<any>(weatherApi).toPromise();
     }
 
+    updateTicket(data: Ticket): Promise<any> {
+        return this.http.put<any>(BackendURL+"ticket/"+data.id, data, httpOptions).toPromise();
+    }
+
+    deleteTicket(data: number): Promise<any> {
+        return this.http.delete<any>(BackendURL+"ticket/"+data).toPromise();
+    }
+
     
  }
