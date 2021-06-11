@@ -1,5 +1,14 @@
-<div class="main-wrapper" fxLayout="column" fxLayoutAlign="center center">
-    <h1>Willkommen zum JKU Maintenance Service</h1>
-    <app-clock></app-clock>
+<div class="main-wrapper" fxLayout="column" fxLayoutAlign="start center">
+    <div class="spacer"></div>
+    <mat-card fxLayout="column" fxLayoutAlign="start center">
+        <h1>Willkommen zum JKU Maintenance Service</h1>
+        <app-clock ></app-clock>
+
+        <div fxLayout=column fxLayoutAlign="start end" >
+            <div class="amount-text">Anzahl aller Tickets: {{totalAmountOfTickets}}</div>
+            <div class="amount-text">Offene Tickets: {{openTickets}}</div>
+            <div class="amount-text">Geschlossene Tickets: {{closedTickets}}</div>
+        </div>
+    </mat-card>
 </div>
 

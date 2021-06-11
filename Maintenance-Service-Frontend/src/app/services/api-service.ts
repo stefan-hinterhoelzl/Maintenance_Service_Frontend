@@ -4,7 +4,7 @@ import { Ticket } from "../model/model";
 import { Room } from "../model/room";
 
 const BackendURL: String = "https://maintenance-spring.herokuapp.com/" 
-
+const weatherApi: string = "https://api.openweathermap.org/data/2.5/onecall?lat=48.33&lon=14.31&exclude=minutely,hourly,daily,alerts&appid=82e6e7356b3e7f28514afc1cdd0723fe"
 const httpOptions =  {
     headers: new HttpHeaders({
        'Content-Type': 'application/json'
@@ -25,9 +25,17 @@ export class ApiService
         return this.http.get<any>(BackendURL+"room").toPromise();
     }
 
+    getAllTickets(): Promise<any>{
+        return this.http.get<any>(BackendURL+"ticket").toPromise();
+    }
+
     saveTicket(data: Ticket): Promise<any> {
         return this.http.post<any>(BackendURL+"ticket", data, httpOptions).toPromise();
     }
 
+    getWeather(): Promise<any>{
+        return this.http.get<any>(weatherApi).toPromise();
+    }
 
+    
  }
