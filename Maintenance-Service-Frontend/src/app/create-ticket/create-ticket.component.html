@@ -8,14 +8,15 @@
         
             <mat-card-content>
                 <mat-form-field class="example-full-width" appearance="outline">
-                    <input matInput placeholder="Titel" type = "text" [formControl] = "title" required>
+                    <mat-label>Titel</mat-label>
+                    <input matInput  type = "text" [formControl] = "title" required>
                     <mat-error *ngIf="title.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
                
 
                 <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Raum wählen: </mat-label>
-                    <mat-select [formControl]="room">
+                    <mat-label>Raum wählen </mat-label>
+                    <mat-select [formControl]="room" required>
                         <mat-option *ngFor="let room of rooms" [value]=room>
                             Raum: {{room.roomNr}} - Type: {{room.roomType}} - Status: {{room.booked?"Bewohnt":"Frei"}}    
                         </mat-option>
