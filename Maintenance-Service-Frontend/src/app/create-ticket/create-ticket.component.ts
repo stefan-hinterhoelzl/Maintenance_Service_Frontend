@@ -2,7 +2,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
-import { Ticket } from '../model/model';
+import { Ticket } from '../model/ticket';
 import { Room } from '../model/room';
 import { ApiService } from '../services/api-service';
 import {formatDate} from '@angular/common';

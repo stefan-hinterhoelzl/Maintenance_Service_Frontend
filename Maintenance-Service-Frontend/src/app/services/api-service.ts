@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Ticket } from "../model/model";
+import { Ticket } from "../model/ticket";
 import { Room } from "../model/room";
 
 const BackendURL: String = "https://maintenance-spring.herokuapp.com/" 

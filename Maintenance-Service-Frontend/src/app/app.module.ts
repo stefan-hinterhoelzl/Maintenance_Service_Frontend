@@ -15,6 +15,7 @@ import { ClockComponent } from './clock/clock.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteTicketDialogComponent } from './delete-ticket-dialog/delete-ticket-dialog.component';
+import { DetailsTicketDialogComponent } from './details-ticket-dialog/details-ticket-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DeleteTicketDialogComponent } from './delete-ticket-dialog/delete-ticke
     TicketListComponent,
     EditTicketDialogComponent,
     DeleteTicketDialogComponent,
+    DetailsTicketDialogComponent,
     AlertComponent,
     ClockComponent
 

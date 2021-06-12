@@ -3,7 +3,7 @@ import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { Ticket } from '../model/model';
+import { Ticket } from '../model/ticket';
 import { Room } from '../model/room';
 import { ApiService } from '../services/api-service';
 
@@ -23,6 +23,7 @@ export class EditTicketDialogComponent implements OnInit {
     this.descr = new FormControl(this.currTicket.description);
     this.priority = new FormControl(this.currTicket.priority);
 
+    console.log(this.currRoom);
 
     this.form = this.fb.group({
       title: this.title,

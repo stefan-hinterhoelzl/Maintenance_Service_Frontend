@@ -1,46 +1,52 @@
 <div class = "main-wrapper" fxLayout = column fxLayoutAlign = "start center">
+    
+    <mat-form-field style = "width: 80%;">
+        <mat-label>Suchen:</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Glühbirne wechseln, HIGH, Offen ..." #input>
+    </mat-form-field>
+    
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-
+        
         <!-- Nr Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> Nr. </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          <td mat-cell *matCellDef="let element" (click) = openDetailsDialog(element)> {{element.id}} </td>
         </ng-container>
         
          <!-- Datum Column -->
          <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef> Datum </th>
-            <td mat-cell *matCellDef="let element"> {{element.createdTimeInSeconds | date:'dd.MM.yyyy HH:mm'}} </td>
+            <td mat-cell *matCellDef="let element" (click) = openDetailsDialog(element)> {{element.createdTimeInSeconds | date:'dd.MM.yyyy HH:mm'}} </td>
           </ng-container>
 
         <!-- RoomNr Column -->
         <ng-container matColumnDef="roomNr">
             <th mat-header-cell *matHeaderCellDef> Raum Nr. </th>
-            <td mat-cell *matCellDef="let element"> {{element.room.roomNr}} </td>
+            <td mat-cell *matCellDef="let element" (click) = openDetailsDialog(element)> {{element.room.roomNr}} </td>
         </ng-container>
 
         <!-- Title Column -->
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef> Titel </th>
-          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          <td mat-cell *matCellDef="let element" (click) = openDetailsDialog(element)> {{element.title}} </td>
         </ng-container>
       
         <!-- priority Column -->
         <ng-container matColumnDef="priority">
             <th mat-header-cell *matHeaderCellDef> Priorität </th>
-            <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+            <td mat-cell *matCellDef="let element" (click) = openDetailsDialog(element)> {{element.priority}} </td>
         </ng-container>
 
         <!-- status Column -->
         <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef> Status </th>
-            <td mat-cell *matCellDef="let element"> {{element.resolved? "Geschlossen":"Offen"}} </td>
+            <td mat-cell *matCellDef="let element" (click) = openDetailsDialog(element)> {{element.resolved}} </td>
         </ng-container>
 
         <!-- roomstatus Column -->
         <ng-container matColumnDef="roomStatus">
             <th mat-header-cell *matHeaderCellDef> Raum Status </th>
-            <td mat-cell *matCellDef="let element"> {{element.room.booked? "Belegt": "Frei"}} </td>
+            <td mat-cell *matCellDef="let element" (click) = openDetailsDialog(element)> {{element.room.booked}} </td>
         </ng-container>
 
         <!-- Edit Column -->
@@ -56,6 +62,17 @@
             <th mat-header-cell *matHeaderCellDef> Löschen </th>
             <td mat-cell *matCellDef="let element">
                 <img style ="width: 20px; cursor: pointer;" src="../../assets/delete.png" (click) = "openDeleteDialog(element)"> 
+            </td>
+        </ng-container>
+
+        <!-- Complete Column -->
+        <ng-container  matColumnDef="complete">
+            <th mat-header-cell *matHeaderCellDef> Abschließen </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="{'hide':element.resolved == true}">
+                <button mat-button mat-raised-button color = "primary" (click) = "alterTicket(element)"> Ticket schließen</button>
+            </td>
+            <td mat-cell *matCellDef="let element" [ngClass]="{'hide':element.resolved == false}">
+                <button mat-button mat-raised-button color = "primary" (click) = "alterTicket(element)"> Ticket öffnen</button>
             </td>
         </ng-container>
       

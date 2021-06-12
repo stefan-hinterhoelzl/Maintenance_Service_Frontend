@@ -1,0 +1,59 @@
+<h2 mat-dialog-title> Ticket Details (Ticket ID: {{currTicket.id}}) </h2>
+    <mat-dialog-content>
+
+        <div style = "width:100%;"fxLayout = column fxLayoutAlign = "start start">
+            <div style = "width:100%;" fxLayout = row fxLayoutAlign = "space-between start">
+                <div style = "font-size: large;">
+                    {{currTicket.title}}
+                </div>
+
+                <div>
+                    {{currTicket.createdTimeInSeconds | date:'dd.MM.yyyy HH:mm'}}
+                </div>
+            </div>
+
+           <div style = "width: 100%;">
+               <mat-divider></mat-divider>
+           </div>
+
+            <div style= "width: 100%; margin-top: 5px; min-height: 100px" >
+            {{currTicket.description}}
+            </div>
+
+            <div style = "width: 100%;">
+                <mat-divider></mat-divider>
+            </div>
+
+            <div style = "width:100%;" fxLayout = row fxLayoutAlign = "space-between start">
+                <div>
+                    Raum: Nr.: {{currTicket.room.roomNr}} - Typ: {{currTicket.room.roomType}} - Status: {{currTicket.room.booked?"Bewohnt":"Frei"}} 
+                </div>
+
+                <div>
+                    Priorität: {{currTicket.priority}}
+                </div>
+            </div>
+
+            <div style = "width:100%;" fxLayout = row fxLayoutAlign = "space-between start">
+                <div>
+                    Status: {{currTicket.resolved}}
+                </div>
+
+                <div *ngIf="currTicket.resolved === false">
+                    Abgeschlossen am: {{currTicket.resolvedTimeInSeconds | date:'dd.MM.yyyy HH:mm'}}
+                </div>
+            </div>
+            
+
+            
+
+
+        </div>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+                <button mat-button mat-raised-button color="primary" (click) = "close()">Schließen</button>
+    </mat-dialog-actions>
+
+
