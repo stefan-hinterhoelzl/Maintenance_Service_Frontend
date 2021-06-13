@@ -46,7 +46,7 @@
         <!-- roomstatus Column -->
         <ng-container matColumnDef="roomStatus">
             <th mat-header-cell *matHeaderCellDef> Raum Status </th>
-            <td mat-cell *matCellDef="let element" (click) = openDetailsDialog(element)> {{element.room.booked}} </td>
+            <td mat-cell *matCellDef="let element" (click) = openDetailsDialog(element)> {{element.room.booked==true?"Besetzt":"Frei"}} </td>
         </ng-container>
 
         <!-- Edit Column -->
@@ -62,17 +62,6 @@
             <th mat-header-cell *matHeaderCellDef> Löschen </th>
             <td mat-cell *matCellDef="let element">
                 <img style ="width: 20px; cursor: pointer;" src="../../assets/delete.png" (click) = "openDeleteDialog(element)"> 
-            </td>
-        </ng-container>
-
-        <!-- Complete Column -->
-        <ng-container  matColumnDef="complete">
-            <th mat-header-cell *matHeaderCellDef> Abschließen </th>
-            <td mat-cell *matCellDef="let element" [ngClass]="{'hide':element.resolved == true}">
-                <button mat-button mat-raised-button color = "primary" (click) = "alterTicket(element)"> Ticket schließen</button>
-            </td>
-            <td mat-cell *matCellDef="let element" [ngClass]="{'hide':element.resolved == false}">
-                <button mat-button mat-raised-button color = "primary" (click) = "alterTicket(element)"> Ticket öffnen</button>
             </td>
         </ng-container>
       

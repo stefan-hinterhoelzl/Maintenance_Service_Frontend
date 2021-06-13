@@ -16,11 +16,12 @@ export class DetailsTicketDialogComponent implements OnInit {
     this.currTicket = data;
   }
   ngOnInit(): void {
+    console.log(this.currTicket)
   }
 
 
-  close() {
-    this.dialogRef.close();
+  close(data = false) {
+    this.dialogRef.close(data);
   }
 
   

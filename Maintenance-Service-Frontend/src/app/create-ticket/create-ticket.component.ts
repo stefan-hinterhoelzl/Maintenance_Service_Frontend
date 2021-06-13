@@ -78,15 +78,13 @@ export class CreateTicketComponent implements OnInit {
      resolved: false,
      resolvedTimeInSeconds: null
    }
-   //delete later 
-   console.log(ticket)
-
-   await this.api.saveTicket(ticket).catch(error =>  {
+   let res: Ticket = await this.api.saveTicket(ticket).catch(error =>  {
     console.log(error)  
     this.alert.error("Fehler beim Anlegen: " + error.error);
    })
 
+   this.alert.success("Ticket mit der ID "+res.id+" wurde angelegt!");
+   this.form.reset();
+   this.priority.setValue("LOW");
   }
-
-
 }

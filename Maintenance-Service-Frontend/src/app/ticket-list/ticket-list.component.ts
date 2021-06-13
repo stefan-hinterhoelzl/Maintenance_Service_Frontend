@@ -17,7 +17,7 @@ import { DetailsTicketDialogComponent } from '../details-ticket-dialog/details-t
 })
 export class TicketListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'date', 'roomNr', 'title', 'priority', 'status', 'roomStatus', 'edit', 'delete', 'complete'];
+  displayedColumns: string[] = ['id', 'date', 'roomNr', 'title', 'priority', 'status', 'roomStatus', 'edit', 'delete'];
   dataSource: any;
   result: any;
   tickets: Ticket[] = [];
@@ -53,14 +53,8 @@ export class TicketListComponent implements OnInit {
       } else {
         this.dataCleaned[i].resolved = "Offen";
       }
-
-      if (this.dataCleaned[i].room.booked == true) {
-        this.dataCleaned[i].room.booked = "Besetzt"
-      } else {
-        this.dataCleaned[i].room.booked = "Frei"
-      }
     }
-    console.log(this.dataCleaned)
+
 
     this.dataSource = new MatTableDataSource(this.dataCleaned);
   }
@@ -71,10 +65,21 @@ export class TicketListComponent implements OnInit {
     dialogConfigEdit.disableClose = true;
     dialogConfigEdit.autoFocus = true;
     dialogConfigEdit.width = "30%"
+
+    let oTicket: Ticket = this.tickets.find(e => {
+      return element.id == e.id;
+    });
     
-    dialogConfigEdit.data= {...element}
+    dialogConfigEdit.data= {...oTicket}
     
-    this.dialog.open(DetailsTicketDialogComponent, dialogConfigEdit);
+    const dialogRef = this.dialog.open(DetailsTicketDialogComponent, dialogConfigEdit);
+
+    dialogRef.afterClosed().pipe(take(1)).subscribe((data) => {
+      console.log(data);
+      if (data == true) {
+        this.alterTicket(oTicket);
+      }
+    });
 
   }
   
@@ -89,7 +94,7 @@ export class TicketListComponent implements OnInit {
     let oTicket: Ticket = this.tickets.find(e => {
       return element.id == e.id;
     });
-
+    
     dialogConfigEdit.data= {...oTicket}
     
     
@@ -126,8 +131,8 @@ export class TicketListComponent implements OnInit {
     let res = await this.api.updateTicket(ticket).catch(error => {
       this.alert.error("Fehler beim Aktualisieren des Tickets"+ error)
     });
+    this.alert.success("Ticket mit der ID "+ticket.id+" wurde bearbeitet!");
 
-    console.log(res);
     this.getTickets();
 
   }
@@ -136,8 +141,8 @@ export class TicketListComponent implements OnInit {
     let res = await this.api.deleteTicket(ticket).catch(error => {
       this.alert.error("Fehler beim Löschen des Tickets"+ error);
     });
+    this.alert.success("Ticket mit der ID "+ticket+" wurde gelöscht!");
     
-    console.log(res);
     this.getTickets();
   }
 
@@ -148,7 +153,14 @@ export class TicketListComponent implements OnInit {
   }
 
   alterTicket(element: Ticket) {
-    element.resolved = !element.resolved;
+    let status: boolean = !element.resolved;
+    element.resolved = status;
+    if (status == true) {
+      element.resolvedTimeInSeconds = Date.now();
+    }else {
+      element.resolvedTimeInSeconds = 0;
+    }
+    
     this.editTicket(element)
   }
 }

@@ -8,7 +8,7 @@ export interface Ticket{
     priority: Priority;
     createdTimeInSeconds: number;
     resolved: boolean;
-    resolvedTimeInSeconds: Date;
+    resolvedTimeInSeconds: number;
 }
 
 export enum Priority{
