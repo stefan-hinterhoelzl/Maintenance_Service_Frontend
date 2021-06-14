@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "maintenance-service-975aa"
+  },
+  "targets": {
+    "maintenance-service-975aa": {
+      "hosting": {
+        "Maintenance-Service-Frontend": [
+          "maintenance-service-975aa"
+        ]
+      }
+    }
+  }
+}

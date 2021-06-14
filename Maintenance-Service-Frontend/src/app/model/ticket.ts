@@ -1,7 +1,7 @@
 import { Room } from "./room";
 
 export interface Ticket{
-    id?: number;
+    id?: String;
     title: String;
     description: String;
     room: Room;

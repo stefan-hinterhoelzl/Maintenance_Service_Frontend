@@ -16,6 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteTicketDialogComponent } from './delete-ticket-dialog/delete-ticket-dialog.component';
 import { DetailsTicketDialogComponent } from './details-ticket-dialog/details-ticket-dialog.component';
+import { environment } from 'src/environments/environment';
+import * as firebase from 'firebase';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
+firebase.default.initializeApp(environment.firebaseConfig);
+
+
+
 
 @NgModule({
   declarations: [
@@ -27,7 +35,8 @@ import { DetailsTicketDialogComponent } from './details-ticket-dialog/details-ti
     DeleteTicketDialogComponent,
     DetailsTicketDialogComponent,
     AlertComponent,
-    ClockComponent
+    ClockComponent,
+   
 
   ],
   imports: [
@@ -39,8 +48,10 @@ import { DetailsTicketDialogComponent } from './details-ticket-dialog/details-ti
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

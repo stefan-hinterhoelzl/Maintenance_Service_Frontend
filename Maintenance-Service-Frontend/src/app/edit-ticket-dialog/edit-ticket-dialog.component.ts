@@ -44,19 +44,17 @@ export class EditTicketDialogComponent implements OnInit {
 
 
   res: any;
-  rooms: Room[];
+  rooms: Room[] = [];
 
   priorities: string[] =  ["LOW", "MEDIUM", "HIGH"];
 
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   async ngOnInit() {
-    this.res = await this.api.getAllRooms();
-    this.rooms = this.res._embedded.roomList;
-    
-    
-    console.log(this.rooms);
-
+    let res = await this.api.getAllRoomsFirestore();
+    res.forEach((doc) => {
+      this.rooms.push(doc.data());
+    });
   }
 
 

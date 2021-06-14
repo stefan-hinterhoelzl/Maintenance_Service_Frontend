@@ -2,6 +2,7 @@ import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 import { Room } from '../model/room';
+import { Ticket } from '../model/ticket';
 import { AlertService } from '../services/alertService';
 import { ApiService } from '../services/api-service';
 
@@ -14,7 +15,7 @@ export class StartComponent implements OnInit {
   totalAmountOfTickets:number = 0;
   openTickets: number = 0;
   closedTickets: number = 0;
-  result: any;
+  result: Ticket[]= [];
   weatherdata;
   temperatur: number;
   weather: string;
@@ -24,25 +25,26 @@ export class StartComponent implements OnInit {
   async ngOnInit(){
 
     // get all tickets from backend
-    this.result = await this.api.getAllTickets().catch( () => {
-      this.alert.error("Tickets not accessable")
-    })
+    let res = await this.api.getAllTicketsFirestore();
+    res.forEach((doc) => {
+      let curr: Ticket = {...doc.data()};
+      curr.id = doc.id;
+      this.result.push(curr);
+    });
 
-    if(this.result._embedded != null) {
-      this.result = this.result._embedded.ticketList
-      // count all tickets
-      this.totalAmountOfTickets = this.result.length
-  
-      // count open tickets
-      this.openTickets = this.result.filter( ticket => {    
-        return ticket.resolved == false
-      }).length
-  
-      // count closed tickets
-      this.closedTickets = this.result.filter( ticket => {    
-        return ticket.resolved == true
-      }).length
-    }
+    // count all tickets
+    this.totalAmountOfTickets = this.result.length
+
+    // count open tickets
+    this.openTickets = this.result.filter( ticket => {    
+      return ticket.resolved == false
+    }).length
+
+    // count closed tickets
+    this.closedTickets = this.result.filter( ticket => {    
+      return ticket.resolved == true
+    }).length
+    
     
   
     // get weather

@@ -17,8 +17,8 @@ import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY } from '@angular
 export class CreateTicketComponent implements OnInit {
 
   res: any;
-  rooms: Room[];
-
+  rooms: Room[] = [];
+  
   form: FormGroup;
   title: FormControl;
   descr: FormControl;
@@ -46,12 +46,10 @@ export class CreateTicketComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.res = await this.api.getAllRooms().catch(error => {
-      this.alert.error("Fehler beim Abfragen der Räume"+error)
+    let res = await this.api.getAllRoomsFirestore();
+    res.forEach((doc) => {
+      this.rooms.push(doc.data());
     });
-    if (this.res._embedded != undefined) {
-      this.rooms = this.res._embedded.roomList;
-    }
   }
 
   triggerResize() {
@@ -79,13 +77,12 @@ export class CreateTicketComponent implements OnInit {
      resolvedTimeInSeconds: null
    }
 
-   console.log(ticket);
-   let res: Ticket = await this.api.saveTicket(ticket).catch(error =>  {
-    console.log(error)  
-    this.alert.error("Fehler beim Anlegen: " + error.error);
-   })
-
-   this.alert.success("Ticket mit der ID "+res.id+" wurde angelegt!");
+    console.log(ticket);
+    let res = await this.api.saveTicketFirestore(ticket);
+  
+   
+   console.log(res);
+   this.alert.success("Ticket wurde angelegt!");
    this.form.reset();
    this.priority.setValue("LOW");
   }

@@ -17,7 +17,7 @@ import { DetailsTicketDialogComponent } from '../details-ticket-dialog/details-t
 })
 export class TicketListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'date', 'roomNr', 'title', 'priority', 'status', 'roomStatus', 'edit', 'delete'];
+  displayedColumns: string[] = ['date', 'roomNr', 'title', 'priority', 'status', 'roomStatus', 'edit', 'delete'];
   dataSource: any;
   result: any;
   tickets: Ticket[] = [];
@@ -34,15 +34,14 @@ export class TicketListComponent implements OnInit {
 
   async getTickets(){
     this.dataCleaned = [];
-    this.result = await this.api.getAllTickets().catch( error => {
-      this.alert.error("Tickets not accessable" + error)
-    })
-
-    if(this.result._embedded != null){
-      this.tickets = this.result._embedded.ticketList
-    }else{
-      this.tickets = [];
-    }
+    this.tickets = [];
+    
+    let res = await this.api.getAllTicketsFirestore();
+    res.forEach((doc) => {
+      let curr: Ticket = {...doc.data()};
+      curr.id = doc.id;
+      this.tickets.push(curr);
+    });
 
     this.dataCleaned = this.tickets.map(x => Object.assign({}, x));
     
@@ -127,21 +126,16 @@ export class TicketListComponent implements OnInit {
   } 
 
   async editTicket(ticket: Ticket) {
-    console.log(ticket);
-    let res = await this.api.updateTicket(ticket).catch(error => {
-      this.alert.error("Fehler beim Aktualisieren des Tickets"+ error)
-    });
-    this.alert.success("Ticket mit der ID "+ticket.id+" wurde bearbeitet!");
+    let res = await this.api.updateTicketFirestore(ticket);
+    this.alert.success("Ticket wurde bearbeitet!");
 
     this.getTickets();
 
   }
 
-  async deleteTicket(ticket: number) {
-    let res = await this.api.deleteTicket(ticket).catch(error => {
-      this.alert.error("Fehler beim Löschen des Tickets"+ error);
-    });
-    this.alert.success("Ticket mit der ID "+ticket+" wurde gelöscht!");
+  async deleteTicket(ticket: String) {
+    let res = await this.api.deleteTicketFirestore(ticket);
+    this.alert.success("Ticket wurde gelöscht!");
     
     this.getTickets();
   }

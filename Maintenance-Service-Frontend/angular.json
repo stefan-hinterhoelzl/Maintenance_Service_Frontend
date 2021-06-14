@@ -119,6 +119,10 @@
               "devServerTarget": "Maintenance-Service-Frontend:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
