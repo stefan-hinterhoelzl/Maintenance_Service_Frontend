@@ -16,7 +16,6 @@ export class ClockComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   ngOnInit() {
-    // Using RxJS Timer
     this.subscription = timer(0, 1000)
       .pipe(
         map(() => new Date()),
