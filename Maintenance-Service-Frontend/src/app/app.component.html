@@ -11,6 +11,7 @@
           <div style = "font-size: 15px; cursor:pointer" [matMenuTriggerFor] = "menu">{{isAuthenticated.email}}</div>
           <mat-menu #menu="matMenu">
             <button mat-menu-item style = "font-size: 15px;" (click) ="signOut()">Abmelden</button>
+            <button mat-menu-item style = "font-size: 15px;" (click) ="openDeleteDialog()">Benutzer löschen</button>
           </mat-menu>
           <a style = "margin-left: 15px" mat-button mat-raised-button routerLink="addticket" routerLinkActive="active">Ticket erstellen</a>
           <a style = "margin-left: 15px" mat-raised-button routerLink="viewtickets" routerLinkActive="active">Ticketübersicht</a>

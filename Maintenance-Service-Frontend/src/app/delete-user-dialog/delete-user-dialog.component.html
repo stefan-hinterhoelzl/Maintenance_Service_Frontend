@@ -1,0 +1,13 @@
+<h2 mat-dialog-title> Benutzer {{user}} Löschen </h2>
+<mat-dialog-content>
+
+    <div>
+        Der Benutzer kann nicht wieder hergestellt werden, sind Sie sicher?
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+            <button mat-button mat-raised-button color="accent" (click) = "delete()">Löschen</button>
+            <button mat-button mat-raised-button color="primary" (click) = "close()">Abbrechen</button>
+</mat-dialog-actions>

@@ -55,7 +55,6 @@ export class RegisterComponent implements OnInit {
 
    await this.auth.signUp(mail, password).then(()=>{
      this.alert.success("Benutzer "+mail+" wurde erstellt!");
-      this.auth.user.next(mail);
       this.router.navigate(['app']);
    }).catch((error) => {
      if (error.code === 'auth/email-already-in-use') {

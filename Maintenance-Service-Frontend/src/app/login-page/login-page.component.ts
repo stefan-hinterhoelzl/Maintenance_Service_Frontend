@@ -44,7 +44,6 @@ export class LoginPageComponent implements OnInit {
       email = email.toLowerCase();
 
       await this.auth.signIn(email, password).then(() =>{
-        this.auth.user.next(email);
         this.router.navigate(['app'])
       }).catch((error) =>{
         this.email.setValue('');

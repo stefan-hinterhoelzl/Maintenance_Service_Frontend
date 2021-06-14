@@ -116,7 +116,7 @@ export class TicketListComponent implements OnInit {
     dialogConfigDelete.autoFocus = true;
 
     dialogConfigDelete.data= {
-      id: element.id,
+      data: element.id,
     }
     
     const dialogRef = this.dialog.open(DeleteTicketDialogComponent, dialogConfigDelete);

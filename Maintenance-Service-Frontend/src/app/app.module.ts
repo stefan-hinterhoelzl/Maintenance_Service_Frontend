@@ -24,6 +24,7 @@ import { AuthGuard } from './services/AuthGuard';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterComponent } from './register/register.component';
+import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
 firebase.default.initializeApp(environment.firebaseConfig);
 
 
@@ -38,6 +39,7 @@ firebase.default.initializeApp(environment.firebaseConfig);
     EditTicketDialogComponent,
     DeleteTicketDialogComponent,
     DetailsTicketDialogComponent,
+    DeleteUserDialogComponent,
     AlertComponent,
     ClockComponent,
     LoginPageComponent,

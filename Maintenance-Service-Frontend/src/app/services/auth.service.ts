@@ -8,8 +8,6 @@ export class AuthService
  {
     auth = firebase.default.auth();
 
-    user = new BehaviorSubject<string>("");
-
     constructor() {
         this.authStatusListener();
     }
@@ -46,10 +44,8 @@ export class AuthService
         return this.auth.createUserWithEmailAndPassword(email, password);
     }
 
-
-    public get currentUserValue(): string {
-        return this.user.value;
+    deleteUser(): Promise<any> {
+        return this.auth.currentUser.delete();
     }
-   
     
  }
