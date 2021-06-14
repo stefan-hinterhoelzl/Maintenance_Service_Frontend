@@ -45,8 +45,6 @@ export class StartComponent implements OnInit {
       return ticket.resolved == true
     }).length
     
-    
-  
     // get weather
     this.weatherdata = await this.api.getWeather()
     this.temperatur = Math.round(this.weatherdata.current.temp)

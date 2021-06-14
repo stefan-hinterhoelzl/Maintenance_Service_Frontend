@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateTicketComponent } from './create-ticket/create-ticket.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './services/AuthGuard';
 import { StartComponent } from './start/start.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 
@@ -10,18 +13,31 @@ const routes: Routes = [
   },
 
   {
+    path: 'login',
+    component: LoginPageComponent,
+  },
+
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+
+  {
     path: 'app',
-    component: StartComponent
+    component: StartComponent,
+    canActivate: [AuthGuard]
   },
 
   {
     path: 'addticket',
-    component: CreateTicketComponent
+    component: CreateTicketComponent,
+    canActivate: [AuthGuard]
   },
 
   {
     path: 'viewtickets',
-    component: TicketListComponent
+    component: TicketListComponent,
+    canActivate: [AuthGuard]
   }
 
 ];

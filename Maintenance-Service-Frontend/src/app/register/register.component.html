@@ -1,0 +1,30 @@
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Registrieren</mat-card-title>
+      </mat-card-header>
+  
+      <form class="example-form" [formGroup] = "form">
+  
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" type = "text" [formControl] = "email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Passwort" type = "password" [formControl] = "password" required>
+            <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Passwort bestätigen" type = "password" [formControl] = "passwordconfirm" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="form.hasError('notSame')">Passwörter stimmen nicht überein</mat-error>
+          </mat-form-field>
+        </mat-card-content>
+
+        <p>* sind Pflichtfelder</p>
+        <button style="margin-top: 2%;" mat-stroked-button color="primary" [disabled] = "!form.valid" (click) = "signUpUser()" class="btn-block">Registrieren</button>
+        
+  
+      </form>
+    </mat-card>
+  </div>

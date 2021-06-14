@@ -4,10 +4,20 @@
         <div class = "row">
           <a href="app" class="positronx">Maintenance Service</a>
        </div>
+
+       
   
-        <div class = "row-end">
-          <a mat-button mat-raised-button routerLink="addticket" routerLinkActive="active">Ticket erstellen</a>
+        <div *ngIf = "this.isAuthenticated != null" class = "row-end">
+          <div style = "font-size: 15px; cursor:pointer" [matMenuTriggerFor] = "menu">{{isAuthenticated.email}}</div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item style = "font-size: 15px;" (click) ="signOut()">Abmelden</button>
+          </mat-menu>
+          <a style = "margin-left: 15px" mat-button mat-raised-button routerLink="addticket" routerLinkActive="active">Ticket erstellen</a>
           <a style = "margin-left: 15px" mat-raised-button routerLink="viewtickets" routerLinkActive="active">Ticketübersicht</a>
+      </div>
+      <div *ngIf = "this.isAuthenticated == null" class = "row-end">
+        <a mat-button mat-raised-button routerLink="login" routerLinkActive="active">Anmelden</a>
+        <a style = "margin-left: 15px" mat-raised-button routerLink="register" routerLinkActive="active">Registrieren</a>
       </div>
     </div>
   </mat-toolbar>
