@@ -8,7 +8,10 @@
        
   
         <div *ngIf = "this.isAuthenticated != null" class = "row-end">
-          <div style = "font-size: 15px; cursor:pointer" [matMenuTriggerFor] = "menu">{{isAuthenticated.email}}</div>
+          <div  style = "font-size: 13px; cursor:pointer;" *ngIf = "this.isAuthenticated.emailVerified == false">
+              Email ist nicht verifiziert - Link hier neu senden!
+          </div>
+          <div style = "font-size: 15px; cursor:pointer; margin-left: 20px;" [matMenuTriggerFor] = "menu">{{isAuthenticated.email}}</div>
           <mat-menu #menu="matMenu">
             <button mat-menu-item style = "font-size: 15px;" (click) ="signOut()">Abmelden</button>
             <button mat-menu-item style = "font-size: 15px;" (click) ="openDeleteDialog()">Benutzer löschen</button>
