@@ -34,7 +34,7 @@ export class CreateTicketComponent implements OnInit {
     this.title = new FormControl('', [Validators.required]);
     this.descr = new FormControl('');
     this.room = new FormControl('', [Validators.required]);
-    this.priority = new FormControl('');
+    this.priority = new FormControl('LOW');
 
     this.form = this.fb.group({
       title: this.title,
@@ -78,6 +78,8 @@ export class CreateTicketComponent implements OnInit {
      resolved: false,
      resolvedTimeInSeconds: null
    }
+
+   console.log(ticket);
    let res: Ticket = await this.api.saveTicket(ticket).catch(error =>  {
     console.log(error)  
     this.alert.error("Fehler beim Anlegen: " + error.error);
