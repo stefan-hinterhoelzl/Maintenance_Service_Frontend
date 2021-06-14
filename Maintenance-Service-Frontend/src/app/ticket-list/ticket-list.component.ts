@@ -54,6 +54,9 @@ export class TicketListComponent implements OnInit {
       }
     }
 
+    this.dataCleaned.sort((a,b) => {
+      return a.createdTimeInSeconds - b.createdTimeInSeconds;
+    });
 
     this.dataSource = new MatTableDataSource(this.dataCleaned);
   }
