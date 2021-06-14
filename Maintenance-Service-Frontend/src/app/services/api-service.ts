@@ -22,10 +22,6 @@ export class ApiService
 
     }
 
-
-    
-    
-
     getAllRoomsFirestore(): Promise<any> {
         return this.afs.collection("rooms").get().toPromise();
     }
