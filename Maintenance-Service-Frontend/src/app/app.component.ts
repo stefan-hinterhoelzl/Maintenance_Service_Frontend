@@ -55,6 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
       if (data == true) {
         await this.auth.deleteUser().then(() => {
           this.alert.success("Benutzer "+this.isAuthenticated.email+" wurde gelöscht.")
+          this.router.navigate(['login']);
         });
       }
     });
