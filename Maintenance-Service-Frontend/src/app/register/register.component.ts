@@ -47,19 +47,20 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {}
 
-
-
-
   async signUpUser() {
     let mail: string = this.email.value;
     mail = mail.toLowerCase();
     let password: string = this.password.value;
 
    await this.auth.signUp(mail, password).then(async (user)=>{
-     this.alert.success("Benutzer "+mail+" wurde erstellt!");
-     await this.auth.sendVerificationLink(user);
-      this.router.navigate(['app']);
+      await this.auth.sendVerificationLink(user.user).then(() => {
+        this.alert.success("Benutzer "+mail+" wurde erstellt.", true);
+        this.router.navigate(['app']);
+      }).catch((error) => {
+        console.log(error);
+      })
    }).catch((error) => {
+    console.log(error);
     let message: string = firebaseErrors[error.code] || "Fehler";
 
     this.alert.error(message);

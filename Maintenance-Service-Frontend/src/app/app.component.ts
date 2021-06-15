@@ -54,7 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(take(1)).subscribe(async (data) => {
       if (data == true) {
         await this.auth.deleteUser().then(() => {
-          this.alert.success("Benutzer "+this.isAuthenticated.email+" wurde gelöscht.")
+          this.alert.success("Benutzer "+this.isAuthenticated.email+" wurde gelöscht.", true)
           this.router.navigate(['login']);
         });
       }
