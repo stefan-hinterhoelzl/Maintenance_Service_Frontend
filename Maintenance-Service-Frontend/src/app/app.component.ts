@@ -63,7 +63,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   async sendVerificationLink() {
     await this.auth.sendVerificationLink(this.isAuthenticated).then(() => {
-      this.alert.success("Link wurde gesendet")
+      this.alert.success("Link wurde gesendet.")
     });
   }
 
