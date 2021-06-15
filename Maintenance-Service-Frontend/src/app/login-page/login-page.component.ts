@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
+import { PasswordResetDialogComponent } from '../password-reset-dialog/password-reset-dialog.component';
 import { AlertService } from '../services/alertService';
 import { AuthService } from '../services/auth.service';
 
@@ -27,7 +30,7 @@ export class LoginPageComponent implements OnInit {
   password = new FormControl('', [Validators.required]);
   form: FormGroup
 
-  constructor(private auth: AuthService, private fb: FormBuilder, private alert: AlertService, private router: Router) { }
+  constructor(private auth: AuthService, private fb: FormBuilder, private alert: AlertService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -62,5 +65,19 @@ export class LoginPageComponent implements OnInit {
     if (this.email.hasError('email')) return "Das ist eine ungültige Email"
 
   }
+
+  openPasswordResetDialog() {
+    
+    const dialogConfigEdit = new MatDialogConfig();
+
+    dialogConfigEdit.disableClose = true;
+    dialogConfigEdit.autoFocus = true;
+    dialogConfigEdit.width = "30%"
+    
+    
+    const dialogRef = this.dialog.open(PasswordResetDialogComponent, dialogConfigEdit);
+  }
+
+  
 
 }

@@ -77,11 +77,9 @@ export class CreateTicketComponent implements OnInit {
      resolvedTimeInSeconds: null
    }
 
-    console.log(ticket);
     let res = await this.api.saveTicketFirestore(ticket);
   
    
-   console.log(res);
    this.alert.success("Ticket wurde angelegt!");
    this.form.reset();
    this.priority.setValue("LOW");

@@ -25,6 +25,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterComponent } from './register/register.component';
 import { DeleteUserDialogComponent } from './delete-user-dialog/delete-user-dialog.component';
+import { PasswordResetDialogComponent } from './password-reset-dialog/password-reset-dialog.component';
 firebase.default.initializeApp(environment.firebaseConfig);
 
 
@@ -40,6 +41,7 @@ firebase.default.initializeApp(environment.firebaseConfig);
     DeleteTicketDialogComponent,
     DetailsTicketDialogComponent,
     DeleteUserDialogComponent,
+    PasswordResetDialogComponent,
     AlertComponent,
     ClockComponent,
     LoginPageComponent,

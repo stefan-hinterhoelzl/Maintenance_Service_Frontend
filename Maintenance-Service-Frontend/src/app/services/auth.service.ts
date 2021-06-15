@@ -1,5 +1,6 @@
 import { stringify } from "@angular/compiler/src/util";
 import { Injectable } from "@angular/core";
+import { FirebaseApp } from "@angular/fire";
 import * as firebase from 'firebase'
 import { BehaviorSubject } from "rxjs";
 
@@ -46,6 +47,14 @@ export class AuthService
 
     deleteUser(): Promise<any> {
         return this.auth.currentUser.delete();
+    }
+
+    sendVerificationLink(user: firebase.default.User): Promise<any> {
+        return user.sendEmailVerification();
+    }
+
+    resetPassword(email: string): Promise<any> {
+        return this.auth.sendPasswordResetEmail(email);
     }
     
  }

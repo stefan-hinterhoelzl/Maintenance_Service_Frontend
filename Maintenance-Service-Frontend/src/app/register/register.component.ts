@@ -11,6 +11,8 @@ import { AuthService } from '../services/auth.service';
 
 const firebaseErrors = {
   'auth/email-already-in-use': 'Dieser Benutzername wird bereits von einem anderen Nutzer verwendet.',
+  'auth/invalid-password':	'Der angegebene Wert für das Password ist ungültig. Es muss eine Zeichenfolge mit mindestens sechs Zeichen sein.',
+  'auth/weak-password': 'Das Passwort muss mindestens 6 Zeichen lang sein.'
 }; // list of firebase error codes to alt
 
 @Component({
@@ -30,7 +32,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router, private fb: FormBuilder, private alert: AlertService) {
     this.email = new FormControl('', [Validators.required, Validators.email]);
-    this.password = new FormControl('', [Validators.required]);
+    this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
     this.passwordconfirm = new FormControl('');
 
     this.form = this.fb.group({
@@ -53,17 +55,14 @@ export class RegisterComponent implements OnInit {
     mail = mail.toLowerCase();
     let password: string = this.password.value;
 
-   await this.auth.signUp(mail, password).then(()=>{
+   await this.auth.signUp(mail, password).then(async (user)=>{
      this.alert.success("Benutzer "+mail+" wurde erstellt!");
+     await this.auth.sendVerificationLink(user);
       this.router.navigate(['app']);
    }).catch((error) => {
-     if (error.code === 'auth/email-already-in-use') {
-      this.alert.error('Dieser Benutzername wird bereits von einem anderen Nutzer verwendet.');
-     }
-     else{
-       this.alert.error("Fehler")
-       console.log(error);
-     }
+    let message: string = firebaseErrors[error.code] || "Fehler";
+
+    this.alert.error(message);
    });
   }
 
@@ -73,6 +72,8 @@ export class RegisterComponent implements OnInit {
     }
 
     if (this.email.hasError('email')) return "Das ist eine ungültige Email"
+
+    if (this.password.hasError("minlength")) return "Das Passwort muss mindestens 6 Zeichen lang sein"
   }
 
   checkPasswords(group: FormGroup) {

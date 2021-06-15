@@ -8,10 +8,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DeleteTicketDialogComponent implements OnInit {
 
-  ticketid: number;
+  header: string
 
   constructor(private dialogRef: MatDialogRef<DeleteTicketDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
-      this.ticketid = data.id;
+      this.header = data.id;
    }
 
   ngOnInit(): void {

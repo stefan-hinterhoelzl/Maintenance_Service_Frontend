@@ -8,7 +8,7 @@
        
   
         <div *ngIf = "this.isAuthenticated != null" class = "row-end">
-          <div  style = "font-size: 13px; cursor:pointer;" *ngIf = "this.isAuthenticated.emailVerified == false">
+          <div style = "font-size: 13px; cursor:pointer;" *ngIf = "this.isAuthenticated.emailVerified == false" (click) = "sendVerificationLink()">
               Email ist nicht verifiziert - Link hier neu senden!
           </div>
           <div style = "font-size: 15px; cursor:pointer; margin-left: 20px;" [matMenuTriggerFor] = "menu">{{isAuthenticated.email}}</div>

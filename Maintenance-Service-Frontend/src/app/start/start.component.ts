@@ -49,8 +49,6 @@ export class StartComponent implements OnInit {
     this.weatherdata = await this.api.getWeather()
     this.temperatur = Math.round(this.weatherdata.current.temp)
     this.weather = this.weatherdata.current.weather[0].description
-    console.log(this.weatherdata.current)
-      
     
   }
 
